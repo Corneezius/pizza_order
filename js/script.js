@@ -1,26 +1,113 @@
+// Business Logic:
+function Pizza(service, size, meat, veggie) {
+  this.service = service;
+  this.pizzaSize = size;
+  this.meat = [];
+  this.veggie = [];
+  this.price = 5;
+}
+
+Pizza.prototype.service = function() {
+  if (this.service === "delivery") {
+    this.price += 2;
+  }
+};
+
+Pizza.prototype.size = function() {
+  if (this.pizzaSize === "medium") {
+    this.price += 1;
+  }
+  else if (this.pizzaSize === "large") {
+    this.price += 2;
+  }
+  else if (this.pizzaSize === "extra-large") {
+    this.price += 3;
+  }
+  else if (this.pizzaSize === "cthulu") {
+    this.price += 10;
+  }
+};
+
+Pizza.prototype.meatTop = function() {
+  this.price += (this.meat.length * 3);
+};
+
+Pizza.prototype.veggieTop = function() {
+  this.price += (this.veggie.length * 2);
+};
+
+Pizza.prototype.orderTotal = function() {
+  return this.size() + this.meatTop.length + this.veggieTop.length + this.price;
+};
+
+
 $(document).ready(function() {
-  $("#submit").click(function(event){
+  $("#order").submit(function(event) {
     event.preventDefault();
-    var ruby = $("#ruby").val();
-    var front = $("#front").val();
-    var cPlus = $("#cPlus").val();
-    var droid = $("#javas").val();
-    var php  = $("#php").val();
-    $("li").hide();
-    if(front === "I want to make websites look great!") {
-      $(".frontEnd").show();
+    var inputPizzaMeat = [];
+    var inputPizzaVeggie = [];
+    var inputService = $("#service").val();
+    var inputPizzaSize = $("#size").val();
+
+    if (document.getElementById('mushroom').checked) {
+      newPizza.veggie.push("mushroom");;
     }
-    else if (cPlus === "Yes") {
-      $(".cPlus").show();
+    if (document.getElementById("redpeppers").checked) {
+      newPizza.veggie.push("redpeppers");;
     }
-    else if(ruby === "Yes") {
-      $(".ruby").show();
+    if (document.getElementById("bellpeppers").checked) {
+      newPizza.veggie.push("bellpeppers");;
     }
-    else if (php === "Yes") {
-      $(".php").show();
+    if (document.getElementById("spinach").checked) {
+      newPizza.veggie.push("spinach");;
     }
-    else {
-      $(".javas").show();
+    if (document.getElementById("arugula").checked) {
+      newPizza.veggie.push("arugula");;
     }
+    if (document.getElementById("apples").checked) {
+      newPizza.veggie.push("apples");;
+    }
+    if (document.getElementById("squash").checked) {
+      newPizza.veggie.push("squash");;
+    }
+    if (document.getElementById("broccoli").checked) {
+      newPizza.veggie.push("broccoli");;
+    }
+    if (document.getElementById("veggie_nonsense").checked) {
+      newPizza.veggie.push("veggie_nonsense");;
+    }
+    if (document.getElementById("pepperoni").checked) {
+      newPizza.meat.push("pepperoni");;
+    }
+    if (document.getElementById("bacon").checked) {
+      newPizza.meat.push("bacon");;
+    }
+    if (document.getElementById("canadian").checked) {
+      newPizza.meat.push("canadian");;
+    }
+    if (document.getElementById("kangaroo").checked) {
+      newPizza.meat.push("kangaroo");;
+    }
+    if (document.getElementById("baby").checked) {
+      newPizza.meat.push("baby");;
+    }
+    if (document.getElementById("bison").checked) {
+      newPizza.meat.push("bison");;
+    }
+    if (document.getElementById("duck").checked) {
+      newPizza.meat.push("duck");;
+    }
+    if (document.getElementById("triceratops").checked) {
+      newPizza.meat.push("triceratops");;
+    }
+
+    console.log(newPizza.orderTotal());
+
+
+    $(".total").append("<div class='total'>" + newPizza.orderTotal() + "</div>")
+
+
+
+
   });
 });
